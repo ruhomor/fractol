@@ -15,7 +15,7 @@ CC = gcc
 NAME = fractol
 
 CFILES = window \
-		mandelbrot
+		main
 
 FW = -framework OpenGL -framework AppKit
 
@@ -40,6 +40,11 @@ $(NAME):
 	@make -C $(LIB)
 	@make -C $(GLIB)
 	@$(CC) $(FLAGS) -o $(NAME) $(SRCS) $(INCL) $(FW)
+
+test:
+	@make -C $(LIB)
+	@make -C $(GLIB)
+	@$(CC) -o $(NAME) $(SRCS) $(INCL) $(FW)
 
 clean:
 	@rm -f $(OUT)

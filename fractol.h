@@ -67,12 +67,30 @@ typedef	struct			s_map
 	unsigned long int	colorrange;
 }						t_map;
 
+typedef struct			s_shift
+{
+	long int			x;
+	long int			y;
+	long int			u_flag;
+	long int			d_flag;
+	long int			l_flag;
+	long int			r_flag;
+}						t_shift;
+
 typedef	struct			s_window
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
 	int					zoom;
 	int					drag_flag;
+	t_shift				shift;
 	t_map				*map;
 }						t_window;
 
+void                            escape_map_butt(t_map *map);
+void                            escape_butt(t_window *meme);
+t_window                        *initwindow(void);
+void                            hookhandler(t_window *meme);
+void                            window(t_map *map, t_window *meme);
+
+#endif
