@@ -1,6 +1,3 @@
-[submodule "libft"]
-	path = libft
-	url = https://github.com/ruhomor/my_c_lib.git
 [submodule "lib"]
 	path = lib
 	url = https://github.com/ruhomor/my_c_lib.git
