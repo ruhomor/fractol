@@ -87,6 +87,15 @@ typedef	struct			s_window
 	t_map				*map;
 }						t_window;
 
+t_point				ft_xy(int x, int y);
+int					mouse_press(int button, int x, int y, void *p);
+int					mouse_move(int x, int y, void *p);
+int					mouse_release(int button, int x, int y, void *p);
+
+int					key_press1(int keycode, void *p);
+int					key_release1(int keycode, void *p);
+void				kph(int keycode, t_window *meme);
+
 void                            escape_map_butt(t_map *map);
 void                            escape_butt(t_window *meme);
 t_window                        *initwindow(void);

@@ -1,5 +1,17 @@
-#include "fractol.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/07 19:36:47 by kachiote          #+#    #+#             */
+/*   Updated: 2020/09/07 19:36:49 by kachiote         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "fractol.h"
+/*
 void				escape_map_butt(t_map *map)
 {
 	long int	**cell;
@@ -36,6 +48,7 @@ void				escape_butt(t_window *meme)
 	}
 	exit(0);
 }
+*/
 
 t_window			*initwindow(void)
 {
@@ -53,10 +66,10 @@ t_window			*initwindow(void)
 
 void				hookhandler(t_window *meme)
 {
-//	mlx_hook(meme->win_ptr, 6, 0, mouse_move, meme);
-//	mlx_hook(meme->win_ptr, 4, 0, mouse_press, meme);
-//	mlx_hook(meme->win_ptr, 5, 0, mouse_release, meme);
-//	mlx_hook(meme->win_ptr, 2, 0, key_press1, meme);
+	mlx_hook(meme->win_ptr, 6, 0, mouse_move, meme);
+	mlx_hook(meme->win_ptr, 4, 0, mouse_press, meme);
+	mlx_hook(meme->win_ptr, 5, 0, mouse_release, meme);
+	mlx_hook(meme->win_ptr, 2, 0, key_press1, meme);
 //	mlx_hook(meme->win_ptr, 3, 0, key_release1, meme);
 	mlx_loop(meme->mlx_ptr);
 }
