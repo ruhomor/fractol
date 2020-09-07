@@ -85,6 +85,7 @@ typedef	struct			s_window
 	int					drag_flag;
 	t_shift				shift;
 	t_map				*map;
+	char				*img_ptr;
 }						t_window;
 
 t_point				ft_xy(int x, int y);
@@ -98,6 +99,7 @@ void				kph(int keycode, t_window *meme);
 
 void                            escape_map_butt(t_map *map);
 void                            escape_butt(t_window *meme);
+
 t_window                        *initwindow(void);
 void                            hookhandler(t_window *meme);
 void                            window(t_map *map, t_window *meme);

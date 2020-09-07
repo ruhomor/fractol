@@ -17,7 +17,8 @@ NAME = fractol
 CFILES = window \
 		main \
 		buttons \
-		button_binds
+		button_binds \
+		escape_button
 
 FW = -framework OpenGL -framework AppKit
 
