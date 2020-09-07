@@ -15,7 +15,9 @@ CC = gcc
 NAME = fractol
 
 CFILES = window \
-		main
+		main \
+		buttons \
+		button_binds
 
 FW = -framework OpenGL -framework AppKit
 
