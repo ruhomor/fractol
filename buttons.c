@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-
+/*
 t_point				ft_xy(int x, int y)
 {
 	static t_point point0;
@@ -68,7 +68,7 @@ int					mouse_press(int button, int x, int y, void *p)
 	}
 	return (0);
 }
-
+*/
 int					mouse_release(int button, int x, int y, void *p)
 {
 	t_window *meme;

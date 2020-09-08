@@ -18,23 +18,60 @@ t_image 		*init_image(void *mlx_ptr)
 
 	image = (t_image*)malloc(sizeof(*image));
 	image->img_ptr = mlx_new_image(mlx_ptr, WINX, WINY);
-	image->img_data = mlx_get_data_addr(image->img_ptr, &image->bpp, 
-			&image->endian, &image->size_line);
+	image->img_data = mlx_get_data_addr(image->img_ptr, &(image->bpp), 
+			&(image->endian), &(image->size_line));
+	return (image);
 }
 
-void 	set_pxl(char *img_data, int line_size, t_pxl pxl)
+void 			destroy_image(void *mlx_ptr, t_image *image)
 {
-	img_data += pxl.x * 4 + 4 * line_size * pxl.y
-	img_data++ = pxl.color.r;
-	img_data++ = pxl.color.g;
-	img_data++ = pxl.color.b;
-	img_data = pxl.color.alpha;
+	mlx_destroy_image(mlx_ptr, image->img_ptr);
+	free(image);
+	image = NULL;
 }
 
-char	*construct_mandelbrot(void *mlx_ptr, t_image *image)
+void 	set_pxl(t_image *image, t_pxl pxl)
 {
-	if (!(image))
-		image = init_image(mlx_ptr);
+	char 	*map;
+
+	map = image->img_data + pxl.x * (image->bpp / 8) + pxl.y * image->size_line; //+= pxl.x * 4 + 4 * line_size * pxl.y;
+	*map++ = pxl.color.r;
+	*map++ = pxl.color.g;
+	*map++ = pxl.color.b;
+	*map = pxl.color.alpha;
+}
+
+void 	fill(t_image *image, t_color color)
+{
+	t_pxl 	pxl;
+	size_t 	i;
+	size_t 	j;
+
+	i = 0;
+	pxl.color = color;
+	while (i < WINX)
+	{
+		j = 0;
+		pxl.x = i;
+		while (j < WINY)
+		{
+			pxl.y = j;
+			set_pxl(image, pxl);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	construct_mandelbrot(void *mlx_ptr, t_image **image)
+{
+	t_color 	color;
+
+	color.r = 125;
+	color.g = 125;
+	color.b = 255;
+	if (!(*image))
+		*image = init_image(mlx_ptr);
+	fill(*image, color);
 	//wtf?
-	return (im_ptr);
 }

@@ -72,7 +72,6 @@ typedef	struct			s_window
 	t_shift				shift;
 }						t_window;
 
-t_point				ft_xy(int x, int y);
 int					mouse_press(int button, int x, int y, void *p);
 int					mouse_move(int x, int y, void *p);
 int					mouse_release(int button, int x, int y, void *p);
@@ -81,11 +80,16 @@ int					key_press1(int keycode, void *p);
 int					key_release1(int keycode, void *p);
 void				kph(int keycode, t_window *meme);
 
-void                            escape_map_butt(t_map *map);
 void                            escape_butt(t_window *meme);
 
 t_window                        *initwindow(void);
 void                            hookhandler(t_window *meme);
-void                            window(t_map *map, t_window *meme);
+void                            window(t_window *meme);
+
+void	construct_mandelbrot(void *mlx_ptr, t_image **image);
+void 	fill(t_image *image, t_color color);
+void 	set_pxl(t_image *image, t_pxl pxl);
+void 			destroy_image(void *mlx_ptr, t_image *image);
+t_image 		*init_image(void *mlx_ptr);
 
 #endif

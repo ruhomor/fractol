@@ -18,7 +18,8 @@ CFILES = window \
 		main \
 		buttons \
 		button_binds \
-		escape_button
+		escape_button \
+		image_constructor
 
 FW = -framework OpenGL -framework AppKit
 
