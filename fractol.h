@@ -24,48 +24,25 @@
 # define MAX -2147483648
 
 # define BUFF_MSIZE 4
-# define WINX 2000
-# define WINY 1000
+//# define WINX 2000
+//# define WINY 1000
+# define WINX 1000
+# define WINY 500
 
 typedef struct			s_color
 {
 	unsigned char		r;
 	unsigned char		g;
 	unsigned char		b;
+	unsigned char		alpha;
 }						t_color;
 
-typedef struct			s_fcolor
+typedef struct			s_pxl
 {
-	float				r;
-	float				g;
-	float				b;
-}						t_fcolor;
-
-typedef struct			s_point
-{
-	long int			x;
-	long int			y;
-	long int			z;
-	t_color				color;
-}						t_point;
-
-typedef struct			s_fpoint
-{
-	float				x;
-	float				y;
-	float				z;
-	t_fcolor			color;
-}						t_fpoint;
-
-typedef	struct			s_map
-{
-	long int			**cell;
-	int					width;
-	int					height;
-	long int			max;
-	long int			min;
-	unsigned long int	colorrange;
-}						t_map;
+	unsigned char			x;
+	unsigned char			y;
+	t_color				color;	
+}				t_pxl;
 
 typedef struct			s_shift
 {
@@ -77,6 +54,15 @@ typedef struct			s_shift
 	long int			r_flag;
 }						t_shift;
 
+typedef struct			s_image
+{
+	int					bpp;
+	int					size_line;
+	int					endian;
+	void				*img_ptr;
+	char				*img_data;
+}						t_image;
+
 typedef	struct			s_window
 {
 	void				*mlx_ptr;
@@ -84,8 +70,6 @@ typedef	struct			s_window
 	int					zoom;
 	int					drag_flag;
 	t_shift				shift;
-	t_map				*map;
-	char				*img_ptr;
 }						t_window;
 
 t_point				ft_xy(int x, int y);
