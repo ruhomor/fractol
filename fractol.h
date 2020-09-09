@@ -39,8 +39,8 @@ typedef struct			s_color
 
 typedef struct			s_pxl
 {
-	unsigned char			x;
-	unsigned char			y;
+	size_t			x;
+	size_t			y;
 	t_color				color;	
 }				t_pxl;
 
@@ -88,6 +88,8 @@ void                            window(t_window *meme);
 
 void	construct_mandelbrot(void *mlx_ptr, t_image **image);
 void 	fill(t_image *image, t_color color);
+void 	fill_if(t_image *image, t_color color, int (*f)(t_pxl));
+int 	even(t_pxl pxl);
 void 	set_pxl(t_image *image, t_pxl pxl);
 void 			destroy_image(void *mlx_ptr, t_image *image);
 t_image 		*init_image(void *mlx_ptr);

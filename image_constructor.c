@@ -19,7 +19,7 @@ t_image 		*init_image(void *mlx_ptr)
 	image = (t_image*)malloc(sizeof(*image));
 	image->img_ptr = mlx_new_image(mlx_ptr, WINX, WINY);
 	image->img_data = mlx_get_data_addr(image->img_ptr, &(image->bpp), 
-			&(image->endian), &(image->size_line));
+			&(image->size_line), &(image->endian));
 	return (image);
 }
 
@@ -39,6 +39,36 @@ void 	set_pxl(t_image *image, t_pxl pxl)
 	*map++ = pxl.color.g;
 	*map++ = pxl.color.b;
 	*map = pxl.color.alpha;
+}
+
+int 	even(t_pxl pxl)
+{
+	if (pxl.x % 2 == 0)
+		return (1);
+	return (0);
+}
+
+void 	fill_if(t_image *image, t_color color, int (*f)(t_pxl))
+{
+	t_pxl 	pxl;
+	size_t 	i;
+	size_t 	j;
+
+	i = 0;
+	pxl.color = color;
+	while (i < WINY)
+	{
+		j = 0;
+		pxl.x = i;
+		while (j < WINX)
+		{
+			pxl.y = j;
+			if ((*f)(pxl))
+				set_pxl(image, pxl);
+			j++;
+		}
+		i++;
+	}
 }
 
 void 	fill(t_image *image, t_color color)
@@ -61,6 +91,7 @@ void 	fill(t_image *image, t_color color)
 		}
 		i++;
 	}
+	printf("x:%zu y:%zu", i, j);
 }
 
 void	construct_mandelbrot(void *mlx_ptr, t_image **image)
@@ -72,6 +103,7 @@ void	construct_mandelbrot(void *mlx_ptr, t_image **image)
 	color.b = 255;
 	if (!(*image))
 		*image = init_image(mlx_ptr);
+	//fill_if(*image, color, even);
 	fill(*image, color);
 	//wtf?
 }
