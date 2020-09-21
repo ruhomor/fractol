@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:28:14 by kachiote          #+#    #+#             */
-/*   Updated: 2020/09/07 20:28:16 by kachiote         ###   ########.fr       */
+/*   Updated: 2020/09/22 00:28:56 by kachiote         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_image 		*init_image(void *mlx_ptr)
 
 	image = (t_image*)malloc(sizeof(*image));
 	image->img_ptr = mlx_new_image(mlx_ptr, WINX, WINY);
-	image->img_data = mlx_get_data_addr(image->img_ptr, &(image->bpp), 
+	image->img_data = mlx_get_data_addr(image->img_ptr, &(image->bpp),
 			&(image->size_line), &(image->endian));
 	return (image);
 }
@@ -46,6 +46,33 @@ int 	even(t_pxl pxl)
 	if (pxl.x % 2 == 0)
 		return (1);
 	return (0);
+}
+
+int		mandelbrot(t_pxl pxl)
+{
+
+	pxl_to_c();
+}
+
+void 	fill_complex(t_image *image, t_color (*f)(t_complex))
+{
+	t_complex	c;
+	size_t		i;
+	size_t		j;
+	t_color		color;
+
+	j = 0;
+	while (j < WINY)
+	{
+		i = 0;
+		while (i < WINX)
+		{						//TODO fractal struct borders and coords to complex number
+			color = f(c);
+			set_pixel(image, j, i, color);
+			i++;
+		}
+		j++;
+	}
 }
 
 void 	fill_if(t_image *image, t_color color, int (*f)(t_pxl))
