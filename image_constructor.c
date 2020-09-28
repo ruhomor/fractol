@@ -6,7 +6,11 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:28:14 by kachiote          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/09/25 17:29:37 by Ruslan           ###   ########.fr       */
+=======
+/*   Updated: 2020/09/22 00:28:56 by kachiote         ###   ########.fr       */
+>>>>>>> 16142dbd2410264ab4e8f8e3491aa25fa6c387e9
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +52,43 @@ int 	even(t_pxl pxl)
 	return (0);
 }
 
+<<<<<<< HEAD
 int 	mandelbrot_set(t_pxl &pxl, t_complex d)
 {
 
 }
 
 void 	fill_if(t_image *image, t_frac frac, int (*f)(t_pxl, t_complex))
+=======
+int		mandelbrot(t_pxl pxl)
+{
+
+	pxl_to_c();
+}
+
+void 	fill_complex(t_image *image, t_color (*f)(t_complex))
+{
+	t_complex	c;
+	size_t		i;
+	size_t		j;
+	t_color		color;
+
+	j = 0;
+	while (j < WINY)
+	{
+		i = 0;
+		while (i < WINX)
+		{						//TODO fractal struct borders and coords to complex number
+			color = f(c);
+			set_pixel(image, j, i, color);
+			i++;
+		}
+		j++;
+	}
+}
+
+void 	fill_if(t_image *image, t_color color, int (*f)(t_pxl))
+>>>>>>> 16142dbd2410264ab4e8f8e3491aa25fa6c387e9
 {
 	t_pxl 	pxl;
 	size_t 	i;

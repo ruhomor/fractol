@@ -29,6 +29,12 @@
 # define WINX 1000
 # define WINY 500
 
+typedef struct			s_complex
+{
+	double				re;
+	double				im;
+}						t_complex;
+
 typedef struct			s_color
 {
 	unsigned char		r;
