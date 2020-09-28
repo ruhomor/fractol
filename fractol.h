@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 22:56:37 by kachiote          #+#    #+#             */
-/*   Updated: 2020/03/04 07:18:04 by kachiote         ###   ########.fr       */
+/*   Updated: 2020/09/25 17:26:51 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct			s_pxl
 {
 	size_t			x;
 	size_t			y;
-	t_color				color;	
+	t_color				color;
 }				t_pxl;
 
 typedef struct			s_shift
@@ -62,6 +62,18 @@ typedef struct			s_image
 	void				*img_ptr;
 	char				*img_data;
 }						t_image;
+
+typedef struct			s_complex
+{
+	double				re;
+	double				im;
+}						t_complex;
+
+typedef struct			s_frac
+{
+	t_complex			lt;
+	t_complex			rb;
+}						t_frac;
 
 typedef	struct			s_window
 {
@@ -88,7 +100,7 @@ void                            window(t_window *meme);
 
 void	construct_mandelbrot(void *mlx_ptr, t_image **image);
 void 	fill(t_image *image, t_color color);
-void 	fill_if(t_image *image, t_color color, int (*f)(t_pxl));
+void 	fill_if(t_image *image, t_frac frac, t_color color, int (*f)(t_complex));
 int 	even(t_pxl pxl);
 void 	set_pxl(t_image *image, t_pxl pxl);
 void 			destroy_image(void *mlx_ptr, t_image *image);

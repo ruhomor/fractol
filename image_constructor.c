@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:28:14 by kachiote          #+#    #+#             */
-/*   Updated: 2020/09/07 20:28:16 by kachiote         ###   ########.fr       */
+/*   Updated: 2020/09/25 17:29:37 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_image 		*init_image(void *mlx_ptr)
 
 	image = (t_image*)malloc(sizeof(*image));
 	image->img_ptr = mlx_new_image(mlx_ptr, WINX, WINY);
-	image->img_data = mlx_get_data_addr(image->img_ptr, &(image->bpp), 
+	image->img_data = mlx_get_data_addr(image->img_ptr, &(image->bpp),
 			&(image->size_line), &(image->endian));
 	return (image);
 }
@@ -48,22 +48,28 @@ int 	even(t_pxl pxl)
 	return (0);
 }
 
-void 	fill_if(t_image *image, t_color color, int (*f)(t_pxl))
+int 	mandelbrot_set(t_pxl &pxl, t_complex d)
+{
+
+}
+
+void 	fill_if(t_image *image, t_frac frac, int (*f)(t_pxl, t_complex))
 {
 	t_pxl 	pxl;
 	size_t 	i;
 	size_t 	j;
 
 	i = 0;
-	pxl.color = color;
-	while (i < WINY)
+	d.re = (frac.lt.re - frac.rb.re) / WINX;
+	d.im = (frac.rb.im - frac.lt.im) / WINY;
+	while (i < WINX)
 	{
 		j = 0;
 		pxl.x = i;
-		while (j < WINX)
+		while (j < WINY)
 		{
 			pxl.y = j;
-			if ((*f)(pxl))
+			if ((*f)(&pxl, d) != 0)
 				set_pxl(image, pxl);
 			j++;
 		}
@@ -103,7 +109,8 @@ void	construct_mandelbrot(void *mlx_ptr, t_image **image)
 	color.b = 255;
 	if (!(*image))
 		*image = init_image(mlx_ptr);
-	//fill_if(*image, color, even);
-	fill(*image, color);
+	printf("gav");
+	fill_if(*image, color, &even);
+//	fill(*image, color);
 	//wtf?
 }
