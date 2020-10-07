@@ -51,6 +51,7 @@ INCL	lib/Makefile	/^INCL = .\/$/;"	m
 LIB	Makefile	/^LIB = .\/lib$/;"	m
 LIBFT_H	lib/libft.h	/^# define LIBFT_H$/;"	d
 MAX	fractol.h	/^# define MAX /;"	d
+MAXITERS	fractol.h	/^# define MAXITERS /;"	d
 MAX_EVENT	minilibx_macos/mlx_int.h	/^#define	MAX_EVENT	/;"	d
 MAX_PIXEL_NB	minilibx_macos/mlx_int.h	/^#define MAX_PIXEL_NB	/;"	d
 MIN	fractol.h	/^# define MIN /;"	d
@@ -87,9 +88,11 @@ b	fractol.h	/^	unsigned char		b;$/;"	m	struct:s_color
 bpp	fractol.h	/^	int					bpp;$/;"	m	struct:s_image
 buffer	minilibx_macos/mlx_int.h	/^  char			*buffer;$/;"	m	struct:mlx_img_list_s
 bytes_per_pixel	minilibx_macos/font.c	/^  unsigned int 	 bytes_per_pixel; \/* 2:RGB16, 3:RGB, 4:RGBA *\/ $/;"	m	struct:__anon1	file:
+c_multiply	image_constructor.c	/^t_complex	c_multiply(t_complex a, t_complex b)$/;"	f
 col	minilibx_macos/mlx_xpm.c	/^  int           col;$/;"	m	struct:s_xpm_col	file:
 color	fractol.h	/^	t_color				color;$/;"	m	struct:s_pxl
 color	minilibx_macos/mlx_xpm.c	/^  int   color;$/;"	m	struct:s_col_name	file:
+colorfonk	image_constructor.c	/^t_color	colorfonk(t_color *color, size_t iters)$/;"	f
 const	cmake-build-debug/CMakeFiles/3.17.3/CompilerIdC/CMakeCCompilerId.c	/^# define const$/;"	d	file:
 construct_mandelbrot	image_constructor.c	/^void	construct_mandelbrot(void *mlx_ptr, t_image **image)$/;"	f
 content	lib/libft.h	/^	void			*content;$/;"	m	struct:s_list
@@ -105,7 +108,7 @@ escape_butt	escape_button.c	/^void				escape_butt(t_window *meme)$/;"	f
 even	image_constructor.c	/^int 	even(t_pxl pxl)$/;"	f
 fd	lib/get_next_line.h	/^	int				fd;$/;"	m	struct:s_ldb
 fill	image_constructor.c	/^void 	fill(t_image *image, t_color color)$/;"	f
-fill_if	image_constructor.c	/^void 	fill_if(t_image *image, t_frac frac, int (*f)(t_pxl, t_complex))$/;"	f
+fill_if	image_constructor.c	/^void	fill_if(t_image *image, t_frac frac, int (*f)(t_pxl, t_complex))$/;"	f
 font	minilibx_macos/mlx_int.h	/^  mlx_img_list_t	*font;$/;"	m	struct:mlx_ptr_s
 font_atlas	minilibx_macos/font.c	/^} font_atlas = {$/;"	v	typeref:struct:__anon1	file:
 font_fshader	minilibx_macos/mlx_int.h	/^  GLuint	font_fshader;$/;"	m	struct:glsl_info_s
@@ -250,7 +253,7 @@ main	cmake-build-debug/CMakeFiles/3.17.3/CompilerIdC/CMakeCCompilerId.c	/^int ma
 main	cmake-build-debug/CMakeFiles/3.17.3/CompilerIdC/CMakeCCompilerId.c	/^void main() {}$/;"	f
 main	main.c	/^int					main(int argc, char **argv)$/;"	f
 main_loop_active	minilibx_macos/mlx_int.h	/^  int			main_loop_active;$/;"	m	struct:mlx_ptr_s
-mandelbrot_set	image_constructor.c	/^int 	mandelbrot_set(t_pxl &pxl, t_complex d)$/;"	f
+mandelbrot	image_constructor.c	/^void		mandelbrot(t_pxl *pxl, t_complex c)$/;"	f
 mlx_col_name	minilibx_macos/mlx_rgb.c	/^struct s_col_name mlx_col_name[] =$/;"	v	typeref:struct:s_col_name
 mlx_img_ctx_s	minilibx_macos/mlx_int.h	/^typedef struct	mlx_img_ctx_s$/;"	s
 mlx_img_ctx_t	minilibx_macos/mlx_int.h	/^} mlx_img_ctx_t;$/;"	t	typeref:struct:mlx_img_ctx_s

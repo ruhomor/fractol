@@ -6,11 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:28:14 by kachiote          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/09/25 17:29:37 by Ruslan           ###   ########.fr       */
-=======
-/*   Updated: 2020/09/22 00:28:56 by kachiote         ###   ########.fr       */
->>>>>>> 16142dbd2410264ab4e8f8e3491aa25fa6c387e9
+/*   Updated: 2020/10/08 00:01:24 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,47 +48,61 @@ int 	even(t_pxl pxl)
 	return (0);
 }
 
-<<<<<<< HEAD
+/*
 int 	mandelbrot_set(t_pxl &pxl, t_complex d)
 {
 
 }
+*/
 
-void 	fill_if(t_image *image, t_frac frac, int (*f)(t_pxl, t_complex))
-=======
-int		mandelbrot(t_pxl pxl)
+t_complex	c_multiply(t_complex a, t_complex b)
 {
+	t_complex	res;
 
-	pxl_to_c();
+	res.re = a.re * b.re - a.im * b.im;
+	res.im = a.re * b.im + a.im * b.re;
+	return (res);
 }
 
-void 	fill_complex(t_image *image, t_color (*f)(t_complex))
+void		mandelbrot(t_pxl *pxl, t_complex c)
 {
-	t_complex	c;
-	size_t		i;
-	size_t		j;
-	t_color		color;
+	size_t		iters;
+	t_complex	z;
+	t_complex	tmp;
 
-	j = 0;
-	while (j < WINY)
+	iters = 0;
+	c.im *= pxl->y;
+	c.re *= pxl->x;
+	while ((z.re * z.re + z.im * z.im < 4) && (iters < MAXITERS))
 	{
-		i = 0;
-		while (i < WINX)
-		{						//TODO fractal struct borders and coords to complex number
-			color = f(c);
-			set_pixel(image, j, i, color);
-			i++;
+		tmp.re = z.re * z.re - z.im * z.im + c.re;
+		tmp.im = 2 * z.re * z.im + c.im;
+		if (z.re == tmp.re && z.im == tmp.im)
+		{
+			iters = MAXITERS;
+			break;
 		}
-		j++;
+		iters++;
 	}
 }
 
-void 	fill_if(t_image *image, t_color color, int (*f)(t_pxl))
->>>>>>> 16142dbd2410264ab4e8f8e3491aa25fa6c387e9
+t_color	colorfonk(t_color *color, size_t iters)
 {
-	t_pxl 	pxl;
-	size_t 	i;
-	size_t 	j;
+	double	t;
+
+	t = iters / MAXITERS;
+
+	color->r = (int)(9 * (1 - t) * t * t * t * 255);
+	color->g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
+	color->b = (int)(8.5 * (1 - t) * (1 - t) * ( 1 - t ) * t * 255);
+}
+
+void	fill_if(t_image *image, t_frac frac, int (*f)(t_pxl, t_complex))
+{
+	t_pxl		pxl;
+	size_t		i;
+	size_t		j;
+	t_complex	d;
 
 	i = 0;
 	d.re = (frac.lt.re - frac.rb.re) / WINX;

@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 22:56:37 by kachiote          #+#    #+#             */
-/*   Updated: 2020/09/25 17:26:51 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/07 23:28:45 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,13 @@
 # include "minilibx_macos/mlx.h"
 # define MIN 2147483647
 # define MAX -2147483648
+# define MAXITERS 2000
 
 # define BUFF_MSIZE 4
 //# define WINX 2000
 //# define WINY 1000
 # define WINX 1000
 # define WINY 500
-
-typedef struct			s_complex
-{
-	double				re;
-	double				im;
-}						t_complex;
 
 typedef struct			s_color
 {
@@ -105,8 +100,8 @@ void                            hookhandler(t_window *meme);
 void                            window(t_window *meme);
 
 void	construct_mandelbrot(void *mlx_ptr, t_image **image);
+void 	fill_if(t_image *image, t_frac frac, int (*f)(t_pxl, t_complex));
 void 	fill(t_image *image, t_color color);
-void 	fill_if(t_image *image, t_frac frac, t_color color, int (*f)(t_complex));
 int 	even(t_pxl pxl);
 void 	set_pxl(t_image *image, t_pxl pxl);
 void 			destroy_image(void *mlx_ptr, t_image *image);
