@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:28:14 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/08 00:01:24 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/08 01:29:08 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,23 @@ void		mandelbrot(t_pxl *pxl, t_complex c)
 		}
 		iters++;
 	}
+	pxl->color = colorfonk(iters);
 }
 
-t_color	colorfonk(t_color *color, size_t iters)
+t_color	colorfonk(size_t iters)
 {
 	double	t;
+	t_color	color;
 
 	t = iters / MAXITERS;
 
-	color->r = (int)(9 * (1 - t) * t * t * t * 255);
-	color->g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
-	color->b = (int)(8.5 * (1 - t) * (1 - t) * ( 1 - t ) * t * 255);
+	color.r = (int)(9 * (1 - t) * t * t * t * 255);
+	color.g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
+	color.b = (int)(8.5 * (1 - t) * (1 - t) * ( 1 - t ) * t * 255);
+	return (color);
 }
 
-void	fill_if(t_image *image, t_frac frac, int (*f)(t_pxl, t_complex))
+void	fill_if(t_image *image, t_frac frac, void (*f)(t_pxl*, t_complex))
 {
 	t_pxl		pxl;
 	size_t		i;
@@ -114,8 +117,12 @@ void	fill_if(t_image *image, t_frac frac, int (*f)(t_pxl, t_complex))
 		while (j < WINY)
 		{
 			pxl.y = j;
+			/*
 			if ((*f)(&pxl, d) != 0)
 				set_pxl(image, pxl);
+			*/
+			(*f)(&pxl, d);
+			set_pxl(image, pxl);
 			j++;
 		}
 		i++;
@@ -148,6 +155,7 @@ void 	fill(t_image *image, t_color color)
 void	construct_mandelbrot(void *mlx_ptr, t_image **image)
 {
 	t_color 	color;
+	t_frac		frac;
 
 	color.r = 125;
 	color.g = 125;
@@ -155,7 +163,11 @@ void	construct_mandelbrot(void *mlx_ptr, t_image **image)
 	if (!(*image))
 		*image = init_image(mlx_ptr);
 	printf("gav");
-	fill_if(*image, color, &even);
+	frac.lt.re = -2;
+	frac.lt.im = 1;
+	frac.rb.re = 1;
+	frac.lt.im = -1;
+	fill_if(*image, frac, &mandelbrot);
 //	fill(*image, color);
 	//wtf?
 }

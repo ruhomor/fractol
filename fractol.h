@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 22:56:37 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/07 23:28:45 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/08 01:29:45 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,12 @@ void                            hookhandler(t_window *meme);
 void                            window(t_window *meme);
 
 void	construct_mandelbrot(void *mlx_ptr, t_image **image);
-void 	fill_if(t_image *image, t_frac frac, int (*f)(t_pxl, t_complex));
+void 	fill_if(t_image *image, t_frac frac, void (*f)(t_pxl*, t_complex));
 void 	fill(t_image *image, t_color color);
 int 	even(t_pxl pxl);
 void 	set_pxl(t_image *image, t_pxl pxl);
 void 			destroy_image(void *mlx_ptr, t_image *image);
 t_image 		*init_image(void *mlx_ptr);
 
+t_color	colorfonk(size_t iters);
 #endif
