@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:51:59 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/09 19:03:29 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/09 20:44:22 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int					mouse_press(int button, int x, int y, void *p)
 	if (button == 4)
 	{
 		printf("\ninnn");
-		meme->frac->zoom *= ZOOMMUL;
+		//meme->frac->zoom *= ZOOMMUL;
 		meme->frac->maxiter += ITERD;
 		zoom_in(meme->frac, x, y);
 		mlx_clear_window(meme->mlx_ptr, meme->win_ptr);
@@ -66,7 +66,7 @@ int					mouse_press(int button, int x, int y, void *p)
 	if (button == 5)
 	{
 		printf("\nout");
-		meme->frac->zoom /= ZOOMDIV;
+		//meme->frac->zoom *= ZOOMDIV;
 		meme->frac->maxiter -= ITERD;
 		zoom_out(meme->frac, x, y);
 		mlx_clear_window(meme->mlx_ptr, meme->win_ptr);
@@ -79,30 +79,30 @@ void	zoom_out(t_frac *frac, int curx, int cury)
 {
 	t_complex	d;
 
-	d.re = curx * frac->d.re * (1 - 1 / frac->zoom);
-	d.im = cury * frac->d.im * (1 - 1 / frac->zoom);
+	d.re = curx * frac->d.re * (1 - 1 / ZOOMDIV);
+	d.im = cury * frac->d.im * (1 - 1 / ZOOMDIV);
 
-	frac->lt.re -= d.re;
-	frac->rb.re -= d.re;
-	frac->lt.im -= d.im;
-	frac->rb.im -= d.im;
-	frac->d.im /= frac->zoom;
-	frac->d.re /= frac->zoom;
+	frac->lt.re += d.re;
+	frac->rb.re += d.re;
+	frac->lt.im += d.im;
+	frac->rb.im += d.im;
+	frac->d.im /= ZOOMDIV;
+	frac->d.re /= ZOOMDIV;
 }
 
 void	zoom_in(t_frac *frac, int curx, int cury)
 {
 	t_complex	d;
 
-	d.re = curx * frac->d.re * (1 - 1 / frac->zoom);
-	d.im = cury * frac->d.im * (1 - 1 / frac->zoom);
+	d.re = curx * frac->d.re * (1 - 1 / ZOOMMUL);
+	d.im = cury * frac->d.im * (1 - 1 / ZOOMMUL);
 
 	frac->lt.re += d.re;
 	frac->rb.re += d.re;
 	frac->lt.im += d.im;
 	frac->rb.im += d.im;
-	frac->d.im /= frac->zoom;
-	frac->d.re /= frac->zoom;
+	frac->d.im /= ZOOMMUL;
+	frac->d.re /= ZOOMMUL;
 }
 
 int					mouse_release(int button, int x, int y, void *p)
