@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:36:47 by kachiote          #+#    #+#             */
-/*   Updated: 2020/09/07 19:36:49 by kachiote         ###   ########.fr       */
+/*   Updated: 2020/10/09 18:49:02 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_window			*initwindow(void)
 
 void				hookhandler(t_window *meme)
 {
-	//mlx_hook(meme->win_ptr, 6, 0, mouse_move, meme);
-	//mlx_hook(meme->win_ptr, 4, 0, mouse_press, meme);
+//	mlx_hook(meme->win_ptr, 6, 0, mouse_move, meme);
+	mlx_hook(meme->win_ptr, 4, 0, mouse_press, meme);
 	mlx_hook(meme->win_ptr, 5, 0, mouse_release, meme);
 	mlx_hook(meme->win_ptr, 2, 0, key_press1, meme);
 	mlx_hook(meme->win_ptr, 3, 0, key_release1, meme);
@@ -41,10 +41,12 @@ void				window(t_window *meme)
 	t_image 	*image;
 
 	image = NULL;
+	meme->img = &image;
 	meme->mlx_ptr = mlx_init();
 	meme->win_ptr = mlx_new_window(meme->mlx_ptr, WINX, WINY, "MEME");
 	//drawmap(meme);  // out to draw fractals
-	construct_mandelbrot(meme->mlx_ptr, &image);
-	mlx_put_image_to_window(meme->mlx_ptr, meme->win_ptr, image->img_ptr, 0, 0);
+	printf("gonna construct\n");
+	construct_fractal(meme->mlx_ptr, meme);
+//	mlx_put_image_to_window(meme->mlx_ptr, meme->win_ptr, image->img_ptr, 0, 0);
 	hookhandler(meme);
 }
