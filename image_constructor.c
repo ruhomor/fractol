@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:28:14 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/09 18:46:25 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/09 22:36:19 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,15 +138,28 @@ void		mandelbrot(t_pxl *pxl, t_complex c, int max)
 		z.im = tmp.im;
 		iters++;
 	}
-	pxl->color = colorfonk(iters);
+	pxl->color = colorfonk(iters, max);
 }
 
-t_color	colorfonk(int iters)
+t_color	colorfonker(int iters, int max)
 {
 	double	t;
 	t_color	color;
 
-	t = (double)iters / (double)MAXITERS;
+	t = (double)iters / (double)max;
+	color.r = (int)(9 * (1 - t) * t * t * t * 255);
+	color.g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
+	color.b = (int)(8.5 * (1 - t) * (1 - t) * ( 1 - t ) * t * 255);
+	color.alpha = 0;
+	return (color);
+}
+
+t_color	colorfonk(int iters, int max)
+{
+	double	t;
+	t_color	color;
+
+	t = (double)iters / (double)max;
 	color.r = (int)(9 * (1 - t) * t * t * t * 255);
 	color.g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
 	color.b = (int)(8.5 * (1 - t) * (1 - t) * ( 1 - t ) * t * 255);

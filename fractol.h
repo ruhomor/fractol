@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 22:56:37 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/09 18:58:56 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/09 22:36:43 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ void 	set_pxl(t_image *image, t_pxl pxl);
 void 			destroy_image(void *mlx_ptr, t_image *image);
 t_image 		*init_image(void *mlx_ptr);
 
-t_color	colorfonk(int iters);
+t_color	colorfonk(int iters, int max);
+t_color	colorfonker(int iters, int max);
 #endif

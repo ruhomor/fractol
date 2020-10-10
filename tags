@@ -96,7 +96,8 @@ c_multiply	image_constructor.c	/^t_complex	c_multiply(t_complex a, t_complex b)$
 col	minilibx_macos/mlx_xpm.c	/^  int           col;$/;"	m	struct:s_xpm_col	file:
 color	fractol.h	/^	t_color				color;$/;"	m	struct:s_pxl
 color	minilibx_macos/mlx_xpm.c	/^  int   color;$/;"	m	struct:s_col_name	file:
-colorfonk	image_constructor.c	/^t_color	colorfonk(int iters)$/;"	f
+colorfonk	image_constructor.c	/^t_color	colorfonk(int iters, int max)$/;"	f
+colorfonker	image_constructor.c	/^t_color	colorfonker(int iters, int max)$/;"	f
 colorsimp	image_constructor.c	/^t_color	colorsimp(int iters)$/;"	f
 const	cmake-build-debug/CMakeFiles/3.17.3/CompilerIdC/CMakeCCompilerId.c	/^# define const$/;"	d	file:
 construct_fractal	image_constructor.c	/^void	construct_fractal(void *mlx_ptr, t_window *meme)$/;"	f
