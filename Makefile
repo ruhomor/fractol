@@ -6,7 +6,7 @@
 #    By: kachiote <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/23 22:57:04 by kachiote          #+#    #+#              #
-#    Updated: 2020/02/23 22:57:06 by kachiote         ###   ########.fr        #
+#    Updated: 2020/10/15 18:32:34 by Ruslan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,16 @@ CC = gcc
 
 NAME = fractol
 
-CFILES = window \
-		main \
-		buttons \
-		button_binds \
+CFILES = button_binds \
 		escape_button \
-		image_constructor
+		complex \
+		colors \
+		events \
+		fractals \
+		image_constructor \
+		buttons \
+		window \
+		main
 
 FW = -framework OpenGL -framework AppKit
 

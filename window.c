@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:36:47 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/15 16:19:05 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/15 18:03:41 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,12 @@ void				hookhandler(t_window *meme)
 
 void				window(t_window *meme)
 {
-	t_image 	*image;
+	t_image		*image;
 
 	image = NULL;
 	meme->img = &image;
 	meme->mlx_ptr = mlx_init();
 	meme->win_ptr = mlx_new_window(meme->mlx_ptr, WINX, WINY, "MEME");
-	//drawmap(meme);  // out to draw fractals
-	printf("gonna construct\n");
 	construct_fractal(meme->mlx_ptr, meme);
-//	mlx_put_image_to_window(meme->mlx_ptr, meme->win_ptr, image->img_ptr, 0, 0);
 	hookhandler(meme);
 }
