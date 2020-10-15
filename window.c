@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:36:47 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/09 18:49:02 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/15 16:19:05 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_window			*initwindow(void)
 
 void				hookhandler(t_window *meme)
 {
-//	mlx_hook(meme->win_ptr, 6, 0, mouse_move, meme);
+	mlx_hook(meme->win_ptr, 6, 0, mouse_move, meme);
 	mlx_hook(meme->win_ptr, 4, 0, mouse_press, meme);
 	mlx_hook(meme->win_ptr, 5, 0, mouse_release, meme);
 	mlx_hook(meme->win_ptr, 2, 0, key_press1, meme);

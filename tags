@@ -97,7 +97,7 @@ col	minilibx_macos/mlx_xpm.c	/^  int           col;$/;"	m	struct:s_xpm_col	file:
 color	fractol.h	/^	t_color				color;$/;"	m	struct:s_pxl
 color	minilibx_macos/mlx_xpm.c	/^  int   color;$/;"	m	struct:s_col_name	file:
 colorfonk	image_constructor.c	/^t_color	colorfonk(int iters, int max)$/;"	f
-colorfonker	image_constructor.c	/^t_color	colorfonker(int iters, int max)$/;"	f
+colorfonker	image_constructor.c	/^t_color	colorfonker(int iters)$/;"	f
 colorsimp	image_constructor.c	/^t_color	colorsimp(int iters)$/;"	f
 const	cmake-build-debug/CMakeFiles/3.17.3/CompilerIdC/CMakeCCompilerId.c	/^# define const$/;"	d	file:
 construct_fractal	image_constructor.c	/^void	construct_fractal(void *mlx_ptr, t_window *meme)$/;"	f
@@ -115,7 +115,7 @@ escape_butt	escape_button.c	/^void				escape_butt(t_window *meme)$/;"	f
 even	image_constructor.c	/^int 	even(t_pxl pxl)$/;"	f
 fd	lib/get_next_line.h	/^	int				fd;$/;"	m	struct:s_ldb
 fill	image_constructor.c	/^void 	fill(t_image *image, t_color color)$/;"	f
-fill_if	image_constructor.c	/^void	fill_if(t_image *image, t_frac frac, void (*f)(t_pxl*, t_complex, int))$/;"	f
+fill_if	image_constructor.c	/^void	fill_if(t_image *image, t_frac frac, void (*f)(t_pxl*, t_frac))$/;"	f
 font	minilibx_macos/mlx_int.h	/^  mlx_img_list_t	*font;$/;"	m	struct:mlx_ptr_s
 font_atlas	minilibx_macos/font.c	/^} font_atlas = {$/;"	v	typeref:struct:__anon1	file:
 font_fshader	minilibx_macos/mlx_int.h	/^  GLuint	font_fshader;$/;"	m	struct:glsl_info_s
@@ -237,6 +237,8 @@ info_version_internal	cmake-build-debug/CMakeFiles/3.17.3/CompilerIdC/CMakeCComp
 init_image	image_constructor.c	/^t_image 		*init_image(void *mlx_ptr)$/;"	f
 initfrac	main.c	/^t_frac	initfrac(int a)$/;"	f
 initwindow	window.c	/^t_window			*initwindow(void)$/;"	f
+julia	image_constructor.c	/^void		julia(t_pxl *pxl, t_frac frac)$/;"	f
+k	fractol.h	/^	t_complex			k;$/;"	m	struct:s_frac
 key_press1	buttons.c	/^int					key_press1(int keycode, void *p)$/;"	f
 key_release1	buttons.c	/^int					key_release1(int keycode, void *p)$/;"	f
 kph	button_binds.c	/^void				kph(int keycode, t_window *meme)$/;"	f
@@ -264,7 +266,7 @@ main	cmake-build-debug/CMakeFiles/3.17.3/CompilerIdC/CMakeCCompilerId.c	/^int ma
 main	cmake-build-debug/CMakeFiles/3.17.3/CompilerIdC/CMakeCCompilerId.c	/^void main() {}$/;"	f
 main	main.c	/^int		main(int argc, char **argv)$/;"	f
 main_loop_active	minilibx_macos/mlx_int.h	/^  int			main_loop_active;$/;"	m	struct:mlx_ptr_s
-mandelbrot	image_constructor.c	/^void		mandelbrot(t_pxl *pxl, t_complex c, int max)$/;"	f
+mandelbrot	image_constructor.c	/^void		mandelbrot(t_pxl *pxl, t_frac frac)$/;"	f
 maxiter	fractol.h	/^	int					maxiter;$/;"	m	struct:s_frac
 mlx_col_name	minilibx_macos/mlx_rgb.c	/^struct s_col_name mlx_col_name[] =$/;"	v	typeref:struct:s_col_name
 mlx_img_ctx_s	minilibx_macos/mlx_int.h	/^typedef struct	mlx_img_ctx_s$/;"	s
@@ -292,6 +294,7 @@ mlx_win_list_s	minilibx_macos/mlx_int.h	/^typedef struct	mlx_win_list_s$/;"	s
 mlx_win_list_t	minilibx_macos/mlx_int.h	/^} mlx_win_list_t;$/;"	t	typeref:struct:mlx_win_list_s
 mlx_xpm_file_to_image	minilibx_macos/mlx_xpm.c	/^void	*mlx_xpm_file_to_image(mlx_ptr_t *xvar,char *file,int *width,int *height)$/;"	f
 mlx_xpm_to_image	minilibx_macos/mlx_xpm.c	/^void	*mlx_xpm_to_image(mlx_ptr_t *xvar,char **xpm_data,int *width,int *height)$/;"	f
+mouse_move	buttons.c	/^int					mouse_move(int x, int y, void *p)$/;"	f
 mouse_press	buttons.c	/^int					mouse_press(int button, int x, int y, void *p)$/;"	f
 mouse_release	buttons.c	/^int					mouse_release(int button, int x, int y, void *p)$/;"	f
 name	minilibx_macos/mlx_xpm.c	/^  char  *name;$/;"	m	struct:s_col_name	file:
@@ -321,6 +324,7 @@ s_frac	fractol.h	/^typedef struct			s_frac$/;"	s
 s_image	fractol.h	/^typedef struct			s_image$/;"	s
 s_ldb	lib/get_next_line.h	/^typedef struct		s_ldb$/;"	s
 s_list	lib/libft.h	/^typedef	struct		s_list$/;"	s
+s_point	fractol.h	/^typedef struct			s_point$/;"	s
 s_pxl	fractol.h	/^typedef struct			s_pxl$/;"	s
 s_shift	fractol.h	/^typedef struct			s_shift$/;"	s
 s_window	fractol.h	/^typedef	struct			s_window$/;"	s
@@ -336,6 +340,7 @@ t_frac	fractol.h	/^}						t_frac;$/;"	t	typeref:struct:s_frac
 t_image	fractol.h	/^}						t_image;$/;"	t	typeref:struct:s_image
 t_ldb	lib/get_next_line.h	/^}					t_ldb;$/;"	t	typeref:struct:s_ldb
 t_list	lib/libft.h	/^}					t_list;$/;"	t	typeref:struct:s_list
+t_point	fractol.h	/^}						t_point;$/;"	t	typeref:struct:s_point
 t_pxl	fractol.h	/^}				t_pxl;$/;"	t	typeref:struct:s_pxl
 t_shift	fractol.h	/^}						t_shift;$/;"	t	typeref:struct:s_shift
 t_window	fractol.h	/^}						t_window;$/;"	t	typeref:struct:s_window
@@ -351,8 +356,10 @@ win_list	minilibx_macos/mlx_int.h	/^  mlx_win_list_t	*win_list;$/;"	m	struct:mlx
 win_ptr	fractol.h	/^	void				*win_ptr;$/;"	m	struct:s_window
 window	window.c	/^void				window(t_window *meme)$/;"	f
 winid	minilibx_macos/mlx_int.h	/^  void			*winid;$/;"	m	struct:mlx_win_list_s
+x	fractol.h	/^	long int			x;$/;"	m	struct:s_point
 x	fractol.h	/^	long int			x;$/;"	m	struct:s_shift
 x	fractol.h	/^	size_t			x;$/;"	m	struct:s_pxl
+y	fractol.h	/^	long int			y;$/;"	m	struct:s_point
 y	fractol.h	/^	long int			y;$/;"	m	struct:s_shift
 y	fractol.h	/^	size_t			y;$/;"	m	struct:s_pxl
 zoom	fractol.h	/^	double				zoom;$/;"	m	struct:s_frac

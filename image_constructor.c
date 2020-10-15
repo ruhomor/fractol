@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:28:14 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/09 22:36:19 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/15 16:26:46 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,37 +116,68 @@ t_complex	pxl_to_point(t_pxl pxl, t_complex d, t_frac frac)
 	return (d);
 }
 
-void		mandelbrot(t_pxl *pxl, t_complex c, int max)
+void		mandelbrot(t_pxl *pxl, t_frac frac)
 {
-	int			iters;
-	t_complex	z;
-	t_complex	tmp;
+	int				iters;
+	t_complex		z;
+	t_complex		tmp;
+	const t_complex	c = pxl_to_point(*pxl, frac.d, frac);
 
 	iters = 0;
 	z.re = 0;
 	z.im = 0;
-	while ((z.re * z.re + z.im * z.im < 4) && (iters < max))
+	while ((z.re * z.re + z.im * z.im < 4) && (iters < frac.maxiter))
 	{
 		tmp.re = z.re * z.re - z.im * z.im + c.re;
 		tmp.im = 2 * z.re * z.im + c.im;
 		if (z.re == tmp.re && z.im == tmp.im)
 		{
-			iters = max;
+			iters = frac.maxiter;
 			break;
 		}
 		z.re = tmp.re;
 		z.im = tmp.im;
 		iters++;
 	}
-	pxl->color = colorfonk(iters, max);
+	//pxl->color = colorfonker(iters, max);
+	pxl->color = colorfonk(iters, frac.maxiter);
 }
 
-t_color	colorfonker(int iters, int max)
+void		julia(t_pxl *pxl, t_frac frac)
+{
+	int				iters;
+	t_complex		z;
+	t_complex		tmp;
+	const t_complex	k = frac.k;
+	const t_complex	c = pxl_to_point(*pxl, frac.d, frac);
+	//const t_complex	c = pxl_to_point(*pxl, frac.d, frac);
+
+	iters = 0;
+	z.re = k.re + c.re;
+	z.im = k.im + c.im;
+	while ((z.re * z.re + z.im * z.im < 32) && (iters < frac.maxiter))
+	{
+		tmp.re = z.re * z.re - z.im * z.im + k.re;
+		tmp.im = 2 * z.re * z.im + k.im;
+		if (z.re == tmp.re && z.im == tmp.im)
+		{
+			iters = frac.maxiter;
+			break;
+		}
+		z.re = tmp.re;
+		z.im = tmp.im;
+		iters++;
+	}
+	//pxl->color = colorfonker(iters, max);
+	pxl->color = colorfonk(iters, frac.maxiter);
+}
+
+t_color	colorfonker(int iters)
 {
 	double	t;
 	t_color	color;
 
-	t = (double)iters / (double)max;
+	t = (double)iters / MAXITERS;
 	color.r = (int)(9 * (1 - t) * t * t * t * 255);
 	color.g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
 	color.b = (int)(8.5 * (1 - t) * (1 - t) * ( 1 - t ) * t * 255);
@@ -167,7 +198,7 @@ t_color	colorfonk(int iters, int max)
 	return (color);
 }
 
-void	fill_if(t_image *image, t_frac frac, void (*f)(t_pxl*, t_complex, int))
+void	fill_if(t_image *image, t_frac frac, void (*f)(t_pxl*, t_frac))
 {
 	t_pxl		pxl;
 	int			i;
@@ -182,7 +213,8 @@ void	fill_if(t_image *image, t_frac frac, void (*f)(t_pxl*, t_complex, int))
 		while (j < WINY)
 		{
 			pxl.y = j;
-			(*f)(&pxl, pxl_to_point(pxl, frac.d, frac), frac.maxiter);
+			(*f)(&pxl, frac);
+			//(*f)(&pxl, pxl_to_point(pxl, frac.d, frac), frac.maxiter);
 			set_pxl(image, pxl);
 			j++;
 		}
@@ -224,7 +256,8 @@ void	construct_fractal(void *mlx_ptr, t_window *meme)
 	//zoom_frac(&frac, pxl);
 	//frac->d.re = (frac->rb.re - frac->lt.re) / WINX;
 	//frac->d.im = (frac->rb.im - frac->lt.im) / WINY;
-	fill_if(*image, *frac, &mandelbrot);
+	fill_if(*image, *frac, &julia);
+	//fill_if(*image, *frac, &mandelbrot);
 	mlx_put_image_to_window(meme->mlx_ptr, meme->win_ptr, (*image)->img_ptr, 0, 0);
 //	fill(*image, color);
 	//wtf?

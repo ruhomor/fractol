@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 22:56:37 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/09 22:36:43 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/15 15:51:08 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 # define BUFF_MSIZE 4
 //# define WINX 2000
 //# define WINY 1000
-# define WINX 600
-# define WINY 400
+# define WINX 900
+# define WINY 600
 # define ZOOMMUL 1.066666
 # define ZOOMDIV 0.937500
-# define ITERD 1
+# define ITERD 2
 
 typedef struct			s_color
 {
@@ -73,6 +73,12 @@ typedef struct			s_complex
 	double				im;
 }						t_complex;
 
+typedef struct			s_point
+{
+	long int			x;
+	long int			y;
+}						t_point;
+
 typedef struct			s_frac
 {
 	int					id;
@@ -80,6 +86,7 @@ typedef struct			s_frac
 	t_complex			rb;
 	t_complex			d;
 	double				zoom;
+	t_complex			k;
 	int					maxiter;
 }						t_frac;
 
@@ -111,7 +118,7 @@ void                            hookhandler(t_window *meme);
 void                            window(t_window *meme);
 
 void	construct_fractal(void *mlx_ptr, t_window *meme);
-void 	fill_if(t_image *image, t_frac frac, void (*f)(t_pxl*, t_complex, int));
+void 	fill_if(t_image *image, t_frac frac, void (*f)(t_pxl*, t_frac));
 void 	fill(t_image *image, t_color color);
 int 	even(t_pxl pxl);
 void 	set_pxl(t_image *image, t_pxl pxl);
@@ -119,5 +126,5 @@ void 			destroy_image(void *mlx_ptr, t_image *image);
 t_image 		*init_image(void *mlx_ptr);
 
 t_color	colorfonk(int iters, int max);
-t_color	colorfonker(int iters, int max);
+t_color	colorfonker(int iters);
 #endif

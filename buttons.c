@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:51:59 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/09 20:44:22 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/15 16:20:34 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,24 @@ t_point				ft_xy(int x, int y)
 	point0.y = y;
 	return (point);
 }
-
+*/
 int					mouse_move(int x, int y, void *p)
 {
+	t_complex	k;
 	t_window	*meme;
-	t_point		point;
-	double		da;
-	double		db;
 
 	meme = (t_window*)p;
-	point = ft_xy(x, y);
-	db = (point.x != 0) ? (double)(x - point.x) / point.x : 0;
-	da = (point.y != 0) ? (double)(y - point.y) / point.y : 0;
-	if (meme->drag_flag == 1)
-	{
-		//meme->angle.a += da;
-		//meme->angle.b += db;
-		mlx_clear_window(meme->mlx_ptr, meme->win_ptr);
-		//drawmap(meme);
-	}
+	k.re = -0.702693;
+	k.im = -0.384201;
+	if (meme->frac->id != 1)
+		return (0);
+	meme->frac->k.re = k.re - (6.28 * x * k.re) / WINX;
+	meme->frac->k.im = k.im - (3.14 * y * k.im) / WINY;
+	printf("k.re: %f k.im: %f\n", k.re, k.im);
+	construct_fractal(meme->mlx_ptr, meme);
 	return (0);
 }
-*/
+
 int					mouse_press(int button, int x, int y, void *p)
 {
 	t_window *meme;

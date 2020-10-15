@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:36:36 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/09 18:49:42 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/15 16:09:09 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_frac	initfrac(int a)
 		frac.rb.re = 1.5;
 		frac.lt.im = 1;
 		frac.rb.im = -1;
+		frac.k.re = 2;
+		frac.k.im = 2;
 	}
 	frac.d.re = (frac.rb.re - frac.lt.re) / WINX;
 	frac.d.im = (frac.rb.im - frac.lt.im) / WINY;
