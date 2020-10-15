@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:28:14 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/15 16:26:46 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/15 16:47:27 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,40 @@ t_complex	pxl_to_point(t_pxl pxl, t_complex d, t_frac frac)
 	d.im += frac.lt.im;
 	d.re += frac.lt.re;
 	return (d);
+}
+
+double		ft_fabs(double a)
+{
+	if (a < 0)
+		return (-a);
+	return (a);
+}
+
+void		burningship(t_pxl *pxl, t_frac frac)
+{
+	int				iters;
+	t_complex		z;
+	t_complex		tmp;
+	const t_complex	c = pxl_to_point(*pxl, frac.d, frac);
+
+	iters = 0;
+	z.re = 0;
+	z.im = 0;
+	while ((z.re * z.re + z.im * z.im < 4) && (iters < frac.maxiter))
+	{
+		tmp.re = z.re * z.re - z.im * z.im + c.re;
+		tmp.im = -2 * ft_fabs(z.re * z.im) + c.im;
+		if (z.re == tmp.re && z.im == tmp.im)
+		{
+			iters = frac.maxiter;
+			break;
+		}
+		z.re = tmp.re;
+		z.im = tmp.im;
+		iters++;
+	}
+	//pxl->color = colorfonker(iters, max);
+	pxl->color = colorfonk(iters, frac.maxiter);
 }
 
 void		mandelbrot(t_pxl *pxl, t_frac frac)
@@ -256,8 +290,12 @@ void	construct_fractal(void *mlx_ptr, t_window *meme)
 	//zoom_frac(&frac, pxl);
 	//frac->d.re = (frac->rb.re - frac->lt.re) / WINX;
 	//frac->d.im = (frac->rb.im - frac->lt.im) / WINY;
-	fill_if(*image, *frac, &julia);
-	//fill_if(*image, *frac, &mandelbrot);
+	if (meme->frac->id == 1)
+		fill_if(*image, *frac, &julia);
+	else if (meme->frac->id == 0)
+		fill_if(*image, *frac, &mandelbrot);
+	else if (meme->frac->id == 2)
+		fill_if(*image, *frac, &burningship);
 	mlx_put_image_to_window(meme->mlx_ptr, meme->win_ptr, (*image)->img_ptr, 0, 0);
 //	fill(*image, color);
 	//wtf?

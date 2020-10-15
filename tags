@@ -90,6 +90,7 @@ appid	minilibx_macos/mlx_int.h	/^  void			*appid;$/;"	m	struct:mlx_ptr_s
 b	fractol.h	/^	unsigned char		b;$/;"	m	struct:s_color
 bpp	fractol.h	/^	int					bpp;$/;"	m	struct:s_image
 buffer	minilibx_macos/mlx_int.h	/^  char			*buffer;$/;"	m	struct:mlx_img_list_s
+burningship	image_constructor.c	/^void		burningship(t_pxl *pxl, t_frac frac)$/;"	f
 bytes_per_pixel	minilibx_macos/font.c	/^  unsigned int 	 bytes_per_pixel; \/* 2:RGB16, 3:RGB, 4:RGBA *\/ $/;"	m	struct:__anon1	file:
 c_add	image_constructor.c	/^t_complex	c_add(t_complex a, t_complex b)$/;"	f
 c_multiply	image_constructor.c	/^t_complex	c_multiply(t_complex a, t_complex b)$/;"	f
@@ -130,6 +131,7 @@ ft_cmp	lib/ft_strstr.c	/^static int	ft_cmp(const char *hs, const char *n)$/;"	f	
 ft_cmpl	lib/ft_strnstr.c	/^static	int	ft_cmpl(const char *hs, const char *n, size_t len)$/;"	f	file:
 ft_countwords	lib/ft_countwords.c	/^size_t	ft_countwords(char const *s, char delim)$/;"	f
 ft_deldel	lib/ft_deldel.c	/^void	*ft_deldel(void **buf)$/;"	f
+ft_fabs	image_constructor.c	/^double		ft_fabs(double a)$/;"	f
 ft_faildel	lib/ft_lstmap.c	/^static void	ft_faildel(void *meme, size_t size)$/;"	f	file:
 ft_isalnum	lib/ft_isalnum.c	/^int	ft_isalnum(int c)$/;"	f
 ft_isalpha	lib/ft_isalpha.c	/^int	ft_isalpha(int c)$/;"	f

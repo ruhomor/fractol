@@ -6,7 +6,7 @@
 /*   By: kachiote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:51:59 by kachiote          #+#    #+#             */
-/*   Updated: 2020/10/15 16:20:34 by Ruslan           ###   ########.fr       */
+/*   Updated: 2020/10/15 16:52:27 by Ruslan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int					mouse_move(int x, int y, void *p)
 	t_window	*meme;
 
 	meme = (t_window*)p;
-	k.re = -0.702693;
-	k.im = -0.384201;
 	if (meme->frac->id != 1)
 		return (0);
+	k.re = -0.702693;
+	k.im = -0.384201;
 	meme->frac->k.re = k.re - (6.28 * x * k.re) / WINX;
 	meme->frac->k.im = k.im - (3.14 * y * k.im) / WINY;
 	printf("k.re: %f k.im: %f\n", k.re, k.im);
